@@ -65,3 +65,5 @@ web-build/
 
 #Android Profiling
 *.hprof
+
+workspace.code-workspace
