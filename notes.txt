@@ -1,0 +1,7 @@
+Packages to be added to package.json
+
+npm install native-base --save ---> https://github.com/GeekyAnts/NativeBase
+https://github.com/kevinejohn/react-native-keyevent
+npm install --save react-native-svg-charts
+
+
