@@ -61,7 +61,6 @@ const Gradient = () => (
 const topSpeed = configData.TOP_SPEED;
 
 export class SpeedWidget extends Component {
-  maxSpeedVisualization = 0;
   state = {
     curSpeedVisualization: 0,
     maxSpeedVisualization: 0,
@@ -71,18 +70,16 @@ export class SpeedWidget extends Component {
 
   componentDidMount() {
     this.calculateValues();
-    console.log(this.maxSpeedNumber);
-    console.log(this.props.curSpeed);
   }
   componentDidUpdate() {
     this.calculateValues();
   }
 
   calculateValues() {
-    this.curSpeedVisualization = this.props.curSpeed / topSpeed;
-    this.maxSpeedVisualization = this.props.maxSpeed / topSpeed;
-    this.curSpeedNumber = this.props.curSpeed;
-    this.maxSpeedNumber = this.props.maxSpeed;
+    this.state.curSpeedVisualization = this.props.curSpeed / topSpeed;
+    this.state.maxSpeedVisualization = this.props.maxSpeed / topSpeed;
+    this.state.curSpeedNumber = this.props.curSpeed;
+    this.state.maxSpeedNumber = this.props.maxSpeed;
   }
 
   render() {
@@ -92,11 +89,10 @@ export class SpeedWidget extends Component {
           <ProgressCircle
             strokeWidth={progessStrokeDimension}
             style={{ height: progressDimension }}
-            progress={
-              this.curSpeedVisualization ? this.curSpeedVisualization : 0
-            }
+            progress={this.state.curSpeedVisualization}
             backgroundColor="#333333"
             progressColor="url(#gradient)"
+            cornerRadius="0"
           >
             <Gradient />
           </ProgressCircle>
@@ -114,21 +110,16 @@ export class SpeedWidget extends Component {
             strokeWidth={halfProgessStrokeDimension}
             style={{ height: progressDimension }}
             backgroundColor="none"
-            progress={
-              this.maxSpeedVisualization ? this.maxSpeedVisualization : 0
-            }
+            progress={this.state.maxSpeedVisualization}
             progressColor="url(#gradient)"
+            cornerRadius="0"
           >
             <Gradient />
           </ProgressCircle>
         </Svg>
         <View style={styles.keyInformation}>
-          <Text style={styles.maxSpeed}>
-            {this.maxSpeedNumber ? this.maxSpeedNumber : 0}
-          </Text>
-          <Text style={styles.curSpeed}>
-            {this.curSpeedNumber ? this.curSpeedNumber : 0}
-          </Text>
+          <Text style={styles.maxSpeed}>{this.state.maxSpeedNumber}</Text>
+          <Text style={styles.curSpeed}>{this.state.curSpeedNumber}</Text>
           <Text style={styles.speedUnits}>KM/H</Text>
         </View>
       </View>

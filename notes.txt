@@ -5,3 +5,67 @@ https://github.com/kevinejohn/react-native-keyevent
 npm install --save react-native-svg-charts
 
 
+
+thermal
+--------
+( cpu0 = 330,
+  cpu1 = 317,
+  cpu2 = 326,
+  cpu3 = 323,
+  mem = 326,
+  gpu = 318,
+  bat = 29500,
+  freeSpace = 0.5679251,
+  batteryPercent = 100,
+  batteryStatus = "Charging",
+  fanSpeed = 0,
+  started = false,
+  usbOnline = true,
+  startedTs = 0,
+  thermalStatus = green,
+  batteryCurrent = -122222,
+  batteryVoltage = 4351933,
+  chargingError = false,
+  chargingDisabled = false,
+  memUsedPercent = 38,
+  cpuPerc = 4,
+  pa0 = 30,
+  networkType = wifi,
+  offroadPowerUsage = 0,
+  networkStrength = good,
+  ipAddr = "192.168.178.32" )
+
+carState
+--------
+Hello World
+( vEgo = 0,
+  gas = 0,
+  gasPressed = false,
+  brake = 0,
+  brakePressed = false,
+  steeringAngle = 0,
+  steeringTorque = 0,
+  steeringPressed = false,
+  gearShifter = unknown,
+  steeringRate = 0,
+  aEgo = 0,
+  vEgoRaw = 0,
+  standstill = false,
+  brakeLights = false,
+  leftBlinker = false,
+  rightBlinker = false,
+  yawRate = 0,
+  genericToggle = false,
+  doorOpen = false,
+  seatbeltUnlatched = false,
+  canValid = false,
+  steeringTorqueEps = 0,
+  clutchPressed = false,
+  steeringRateLimited = false,
+  stockAeb = false,
+  stockFcw = false,
+  espDisabled = false,
+  leftBlindspot = false,
+  rightBlindspot = false,
+  steerWarning = false,
+  steerError = false )

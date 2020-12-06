@@ -9,19 +9,16 @@ import Svg, { Circle, G, Line, Rect, Mask, text } from "react-native-svg";
 import HeaderX from "./src/components/HeaderX";
 import io from "socket.io-client";
 import { LogBox } from "react-native";
-
 import { SpeedWidget } from "./src/components/SpeedWidget";
+import { SteeringWidget } from "./src/components/SteeringWidget";
 
-//import io from "socket.io-client/dist/socket.io.js";
 // const socket = io("http://192.168.178.21:5000", {
-//   transports: ["polling"],
-// });
-const socket = io("http://192.168.178.21:5000", {
-  transports: ["websocket"],
-});
-// const socket = io.connect("http://192.168.178.21:5000", {
 //   transports: ["websocket"],
 // });
+
+const socket = io("http://192.168.178.32:5000", {
+  transports: ["websocket"],
+});
 
 const keyMap = {
   19: "UP",
@@ -61,11 +58,15 @@ const styles = StyleSheet.create({
   },
 
   subContainer: {
-    height: "98%",
-    width: "98%",
-    top: "1%",
+    height: "100%",
+    width: "100%",
+    //top: "1%",
     backgroundColor: "#121212",
     alignSelf: "center",
+    alignItems: "center",
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
   },
   rect5: {
     flex: 0.5,
@@ -88,13 +89,12 @@ export default class App extends React.Component {
     socket.connect();
 
     socket.on("connect", () => {
-      //      console.log("connected to socket server");
+      console.log("connected to socket server");
     });
-    socket.on("speed value", (msg) => {
-      //    console.log(msg);
-      var z = msg / 100;
-
-      this.setState({ speedValue: z });
+    socket.on("OPDATA", (msg) => {
+      let opData = JSON.parse(msg);
+      this.setState({ steeringAngle: opData.steeringAngle });
+      this.setState({ steeringAngle: opData.vEgo });
     });
   }
 
@@ -110,8 +110,7 @@ export default class App extends React.Component {
     }
     var x = this.state.graphValue;
     var y = this.state.speed;
-    //  console.log("hello" + this.map[keyMap[keyEvent.keyCode]]);
-    //  console.log("hello" + keyMap[keyEvent.keyCode]);
+
     if (keyMap[keyEvent.keyCode] == "UP") {
       x = x + 0.01;
       y = y + 1;
@@ -126,11 +125,13 @@ export default class App extends React.Component {
   }
 
   state = {
+    curSpeed: 0,
     graphValue: 0.3,
     speedValue: 0.9,
     speed: 30,
     chatMessage: "",
     chatMessages: [],
+    steeringAngle: 0,
   };
 
   render() {
@@ -139,12 +140,14 @@ export default class App extends React.Component {
         <Row size={2} style={styles.mainContainer}>
           <SpeedWidget
             maxSpeed={this.state.speed}
-            curSpeed={this.state.speed}
+            curSpeed={this.state.curSpeed}
           />
         </Row>
         <Row size={1}>
           <Col>
-            <View style={styles.subContainer}></View>
+            <View style={styles.subContainer}>
+              <SteeringWidget steeringAngle={this.state.steeringAngle} />
+            </View>
           </Col>
           <Col>
             <View style={styles.subContainer}></View>
